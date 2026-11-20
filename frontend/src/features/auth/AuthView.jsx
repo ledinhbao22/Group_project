@@ -970,71 +970,15 @@ export function AuthView({ onLogin, onDemo }) {
 
                 {/* LOGIN: FORGOT PASSWORD */}
                 {mode === "login" && (
-                  <>
-                    <div style={{ textAlign: "right", marginTop: -4, marginBottom: 12 }}>
-                      <button
-                        type="button"
-                        className="og-ed-inline-link"
-                        onClick={() => changeMode("forgot")}
-                      >
-                        Quên mật khẩu?
-                      </button>
-                    </div>
-
-                    {/* LOGIN: QUICK ADMIN ACCESS */}
-                    <div
-                      style={{
-                        background: "rgba(15, 23, 42, 0.04)",
-                        border: "1px dashed #cbd5e1",
-                        borderRadius: 8,
-                        padding: "10px 14px",
-                        marginBottom: 16,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        gap: 10,
-                      }}
+                  <div style={{ textAlign: "right", marginTop: -4, marginBottom: 16 }}>
+                    <button
+                      type="button"
+                      className="og-ed-inline-link"
+                      onClick={() => changeMode("forgot")}
                     >
-                      <div>
-                        <div
-                          style={{
-                            fontSize: "0.8rem",
-                            fontWeight: 700,
-                            color: "#0f172a",
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 6,
-                          }}
-                        >
-                          <span>⚡ Tài khoản Quản trị viên (Admin)</span>
-                        </div>
-                        <div style={{ fontSize: "0.72rem", color: "#64748b", marginTop: 2 }}>
-                          <code>admin@demo.optigym</code> &bull; MK: <code>123456</code>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          patch("email", "admin@demo.optigym");
-                          patch("password", "123456");
-                        }}
-                        style={{
-                          padding: "6px 12px",
-                          fontSize: "0.75rem",
-                          fontWeight: 700,
-                          background: "#0f172a",
-                          color: "#ccff00",
-                          border: "none",
-                          borderRadius: 6,
-                          cursor: "pointer",
-                          whiteSpace: "nowrap",
-                          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                        }}
-                      >
-                        Điền nhanh Admin
-                      </button>
-                    </div>
-                  </>
+                      Quên mật khẩu?
+                    </button>
+                  </div>
                 )}
 
                 {/* SUBMIT BUTTON */}
