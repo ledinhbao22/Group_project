@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS password_resets (
+  user_id BIGINT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  code_hash VARCHAR(100) NOT NULL,
+  expires_at TIMESTAMPTZ NOT NULL,
+  sent_at TIMESTAMPTZ NOT NULL,
+  attempts INTEGER NOT NULL DEFAULT 0,
+  window_start TIMESTAMPTZ NOT NULL,
+  sends_window INTEGER NOT NULL DEFAULT 1,
+  grant_hash VARCHAR(64),
+  grant_expires TIMESTAMPTZ
+);
+
+ALTER TABLE password_resets ADD COLUMN IF NOT EXISTS grant_hash VARCHAR(64);
+ALTER TABLE password_resets ADD COLUMN IF NOT EXISTS grant_expires TIMESTAMPTZ;

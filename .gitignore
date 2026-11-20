@@ -1,0 +1,30 @@
+# Node
+node_modules/
+dist/
+.render-check/
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.log
+
+# Environment & IDE
+.env
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+
+.agents/
+skills-lock.json
+WORKFLOW.md
+docs/superpowers/
+docs/qa/project-context.md
+
+*.exe
+*.dll
+*.ps1
+*.bat
+*.cmd

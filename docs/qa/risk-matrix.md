@@ -1,0 +1,13 @@
+# OptiGym Ver 2 — Risk Matrix
+
+| Risk ID | Area | Failure Mode | Likelihood | Impact | Risk Level | Test Coverage / Mitigation |
+|---|---|---|---|---|---|---|
+| R-01 | Frontend Build & Boot | Missing modules imported by `PagesView.jsx` and `freshSample.js` break `vite build` and SPA startup | High (Confirmed) | Critical | **Critical** | `npm run build` + static import scan |
+| R-02 | Database Schema vs SQL | `PasswordResetService` uses `grant_hash`/`grant_expires` missing from `03-password-reset.sql`; `AdminDashboardController` & `OperationsController` query 9 tables missing from `db/schema/*.sql` | High (Confirmed) | Critical | **Critical** | Java SQL-vs-DDL schema scan + code audit |
+| R-03 | Mocked Test Blind Spot | `AuthAndSecurityTest` & `PasswordResetFlowTest` mock `JdbcTemplate` and `SessionSecurity`, masking real SQL/schema failures | High (Confirmed) | High | **High** | Audit of `src/test/java/com/optigym/*.java` |
+| R-04 | Frontend–Backend API Gap | `PtWorkspace.jsx`, `loadPaths.js`, `AdminPackagesView`, `AdminInvoicesView`, `AdminScheduleView` call endpoints (`/api/pt/*`, `/api/coaching/*`, `/api/classes`, `/api/admin/packages`, `/api/orders`, `/api/tracking`, etc.) absent from backend | High (Confirmed) | High | **High** | Endpoint contract cross-check script |
+| R-05 | Silent Mock Fallback | `AdminDashboardController.getMetrics` catches SQL errors and returns hardcoded numbers (`1225`, `900`, `225`) | High (Confirmed) | High | **High** | Code audit of `AdminDashboardController.java` |
+| R-06 | Auth & Security Boundaries | Missing `Origin` header passes `writeCheck`; `AdminBootstrapConfiguration` crashes startup if `ADMIN_EMAIL`/`ADMIN_PASSWORD` (>=12 chars) unset; `addMember` lacks password max length & uses `MAX(id)+1` race for `member_code` | Medium | High | **High** | Security & bootstrap code audit |
+| R-07 | Admin/PT Feedback & Navigation | `AdminWorkspace` and `PtWorkspace` drop `toast` & `loadErrors` props; `HomeView` calls `go("users")` (not in `allowedPages.ADMIN`) | High (Confirmed) | Medium | **Medium** | Search & JSX inspection |
+| R-08 | `fetch` `credentials` Misplacement | 14 `fetch()` calls across 7 Admin views place `credentials: "same-origin"` inside `headers` instead of fetch options | High (Confirmed) | Medium | **Medium** | Static search across `frontend/src` |
+| R-09 | UI Resilience (`break-ui`) | `initials()` breaks UTF-16 emojis and trailing spaces; `progressOf()` returns `NaN` when child weights sum to 0; unpaginated `AdminUsersView` table; missing `maxLength` / `overflow-wrap` / `Tag` `kind` prop | High (Confirmed) | Medium | **Medium** | Node edge-case unit checks + CSS/JSX audit |
